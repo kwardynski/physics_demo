@@ -18,6 +18,8 @@ defmodule PhysicsDemoWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+
+    live "/test", Test
   end
 
   # Other scopes may use custom stacks.
