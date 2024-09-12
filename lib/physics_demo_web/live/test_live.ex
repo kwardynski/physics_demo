@@ -1,15 +1,10 @@
 defmodule PhysicsDemoWeb.TestLive do
   use PhysicsDemoWeb, :live_view
 
-  defp bump, do: Process.send_after(self(), "bump", 500)
-
   def render(assigns) do
     ~H"""
-    <%= @bumps %>
-    <br>
+    <br />
     <div id="test" phx-hook="TestHook" />
-    <br>
-    TEST
     """
   end
 
@@ -17,8 +12,7 @@ defmodule PhysicsDemoWeb.TestLive do
     if connected?(socket),
       do: :timer.send_interval(1000, self(), :tick)
 
-    # bump()
-    {:ok, assign(socket, bumps: 0)}
+    {:ok, socket}
   end
 
   def handle_info(:tick, socket) do
@@ -27,13 +21,6 @@ defmodule PhysicsDemoWeb.TestLive do
     y_pos = random_position()
 
     {:noreply, push_event(socket, "update-circle", %{color: color, x: x_pos, y: y_pos})}
-  end
-
-  def handle_info("bump", socket) do
-    new_bumps = socket.assigns.bumps + 1
-    bump()
-
-    {:noreply, assign(socket, bumps: new_bumps)}
   end
 
   defp random_color, do: Enum.random(0..255)
