@@ -2,7 +2,9 @@ import * as d3 from "d3";
 
 let TestHook = {
   mounted() {
-    var position;
+    this.handleEvent("update-circle", ({ color, x, y }) => {
+      d3.select("circle").style("fill", color).attr("cx", x).attr("cy", y);
+    });
 
     var width = 300;
     var height = 300;
@@ -14,12 +16,19 @@ let TestHook = {
       .attr("height", height);
 
     svg
+      .append("rect")
+      .attr("width", width)
+      .attr("height", height)
+      .attr("fill", "none")
+      .attr("stroke", "black");
+
+    svg
       .append("circle")
-      .attr("cx", 100)
+      .attr("cx", 20)
       .attr("cy", 100)
-      .attr("r", 50)
+      .attr("r", 5)
       .attr("stroke", "black")
-      .attr("fill", "#ffff");
+      .attr("fill", "rgb(255, 0, 255)");
   },
 };
 
