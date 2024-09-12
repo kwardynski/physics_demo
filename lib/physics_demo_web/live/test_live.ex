@@ -1,4 +1,4 @@
-defmodule PhysicsDemoWeb.Test do
+defmodule PhysicsDemoWeb.TestLive do
   use PhysicsDemoWeb, :live_view
 
   defp bump, do: Process.send_after(self(), "bump", 500)
