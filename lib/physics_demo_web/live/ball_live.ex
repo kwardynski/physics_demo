@@ -7,6 +7,7 @@ defmodule PhysicsDemoWeb.BallLive do
 
   @board_width 300
   @board_height 300
+
   @speed 2
   @frame_rate 10
 
@@ -19,12 +20,12 @@ defmodule PhysicsDemoWeb.BallLive do
 
   def mount(_params, _session, socket) do
     if connected?(socket),
-      do: :timer.send_interval(10, self(), :tick)
+      do: :timer.send_interval(@frame_rate, self(), :tick)
 
     socket =
       socket
-      |> assign(point: point())
-      |> assign(velocity: velocity())
+      |> assign(point: Point.new(@board_width / 2, @board_height / 2))
+      |> assign(velocity: Velocity.new(@speed, Enum.random(0..360)))
       |> push_event("init", %{width: @board_width, height: @board_height})
 
     {:ok, socket}
@@ -38,8 +39,8 @@ defmodule PhysicsDemoWeb.BallLive do
 
     updated_velocity =
       cond do
-        next_x < 0 or next_x > 300 -> Physics.bounce(velocity, :horizontal)
-        next_y < 0 or next_y > 300 -> Physics.bounce(velocity, :vertical)
+        next_x < 0 or next_x > @board_height -> Physics.bounce(velocity, :horizontal)
+        next_y < 0 or next_y > @board_height -> Physics.bounce(velocity, :vertical)
         true -> velocity
       end
 
@@ -52,13 +53,5 @@ defmodule PhysicsDemoWeb.BallLive do
       |> push_event("update-circle", %{x: translated_point.x, y: translated_point.y})
 
     {:noreply, socket}
-  end
-
-  defp point, do: Point.new(150, 150)
-
-  defp velocity do
-    heading = Enum.random(0..360)
-    speed = 2
-    Velocity.new(speed, heading)
   end
 end
