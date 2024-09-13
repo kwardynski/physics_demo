@@ -5,6 +5,11 @@ defmodule PhysicsDemoWeb.BallLive do
   alias GamesEngine.Physics
   alias GamesEngine.Physics.Velocity
 
+  @board_width 300
+  @board_height 300
+  @speed 2
+  @frame_rate 10
+
   def render(assigns) do
     ~H"""
     <br />
@@ -20,6 +25,7 @@ defmodule PhysicsDemoWeb.BallLive do
       socket
       |> assign(point: point())
       |> assign(velocity: velocity())
+      |> push_event("init", %{width: @board_width, height: @board_height})
 
     {:ok, socket}
   end
