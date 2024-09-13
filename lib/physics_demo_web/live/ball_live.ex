@@ -1,6 +1,10 @@
 defmodule PhysicsDemoWeb.BallLive do
   use PhysicsDemoWeb, :live_view
 
+  alias GamesEngine.Grid.Point
+  alias GamesEngine.Physics
+  alias GamesEngine.Physics.Velocity
+
   def render(assigns) do
     ~H"""
     <br />
@@ -10,19 +14,45 @@ defmodule PhysicsDemoWeb.BallLive do
 
   def mount(_params, _session, socket) do
     if connected?(socket),
-      do: :timer.send_interval(1000, self(), :tick)
+      do: :timer.send_interval(10, self(), :tick)
+
+    socket =
+      socket
+      |> assign(point: point())
+      |> assign(velocity: velocity())
 
     {:ok, socket}
   end
 
   def handle_info(:tick, socket) do
-    color = "rgb(#{random_color()}, #{random_color()}, #{random_color()})"
-    x_pos = random_position()
-    y_pos = random_position()
+    point = socket.assigns.point
+    velocity = socket.assigns.velocity
 
-    {:noreply, push_event(socket, "update-circle", %{color: color, x: x_pos, y: y_pos})}
+    %{x: next_x, y: next_y} = Physics.translate(point, velocity)
+
+    updated_velocity =
+      cond do
+        next_x < 0 or next_x > 300 -> Physics.bounce(velocity, :horizontal)
+        next_y < 0 or next_y > 300 -> Physics.bounce(velocity, :vertical)
+        true -> velocity
+      end
+
+    translated_point = Physics.translate(point, updated_velocity)
+
+    socket =
+      socket
+      |> assign(point: translated_point)
+      |> assign(velocity: updated_velocity)
+      |> push_event("update-circle", %{x: translated_point.x, y: translated_point.y})
+
+    {:noreply, socket}
   end
 
-  defp random_color, do: Enum.random(0..255)
-  defp random_position, do: Enum.random(0..300)
+  defp point, do: Point.new(150, 150)
+
+  defp velocity do
+    heading = Enum.random(0..360)
+    speed = 2
+    Velocity.new(speed, heading)
+  end
 end

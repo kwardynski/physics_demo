@@ -2,8 +2,8 @@ import * as d3 from "d3";
 
 let BallHook = {
   mounted() {
-    this.handleEvent("update-circle", ({ color, x, y }) => {
-      d3.select("circle").style("fill", color).attr("cx", x).attr("cy", y);
+    this.handleEvent("update-circle", ({ x, y }) => {
+      d3.select("circle").style("fill", "black").attr("cx", x).attr("cy", y);
     });
 
     var width = 300;
@@ -27,8 +27,8 @@ let BallHook = {
       .attr("cx", 20)
       .attr("cy", 100)
       .attr("r", 5)
-      .attr("stroke", "black")
-      .attr("fill", "rgb(255, 0, 255)");
+      .attr("stroke", "white")
+      .attr("fill", "white");
   },
 };
 
