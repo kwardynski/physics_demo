@@ -22,10 +22,10 @@ import { Socket } from "phoenix";
 import { LiveSocket } from "phoenix_live_view";
 import topbar from "../vendor/topbar";
 
-import { TestHook } from "./hooks/test";
+import { BallHook } from "./hooks/ball";
 
 let Hooks = {};
-Hooks.TestHook = TestHook;
+Hooks.BallHook = BallHook;
 
 let csrfToken = document
   .querySelector("meta[name='csrf-token']")

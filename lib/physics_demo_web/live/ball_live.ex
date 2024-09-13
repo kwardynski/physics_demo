@@ -1,10 +1,10 @@
-defmodule PhysicsDemoWeb.TestLive do
+defmodule PhysicsDemoWeb.BallLive do
   use PhysicsDemoWeb, :live_view
 
   def render(assigns) do
     ~H"""
     <br />
-    <div id="test" phx-hook="TestHook" />
+    <div id="ball-field" phx-hook="BallHook" />
     """
   end
 
