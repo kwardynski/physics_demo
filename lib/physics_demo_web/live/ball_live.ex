@@ -13,8 +13,9 @@ defmodule PhysicsDemoWeb.BallLive do
 
   def render(assigns) do
     ~H"""
-    <br />
     <div id="ball-field" phx-hook="BallHook" />
+    <br />
+    <.button phx-click="reset">Reset</.button>
     """
   end
 
@@ -24,8 +25,8 @@ defmodule PhysicsDemoWeb.BallLive do
 
     socket =
       socket
-      |> assign(point: Point.new(@board_width / 2, @board_height / 2))
-      |> assign(velocity: Velocity.new(@speed, Enum.random(0..360)))
+      |> assign(point: new_point())
+      |> assign(velocity: new_velocity())
       |> push_event("init", %{width: @board_width, height: @board_height})
 
     {:ok, socket}
@@ -54,4 +55,16 @@ defmodule PhysicsDemoWeb.BallLive do
 
     {:noreply, socket}
   end
+
+  def handle_event("reset", _params, socket) do
+    socket =
+      socket
+      |> assign(point: new_point())
+      |> assign(velocity: new_velocity())
+
+    {:noreply, socket}
+  end
+
+  defp new_point, do: Point.new(@board_width / 2, @board_height / 2)
+  defp new_velocity, do: Velocity.new(@speed, Enum.random(0..360))
 end
