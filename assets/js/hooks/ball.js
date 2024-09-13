@@ -1,6 +1,6 @@
 import * as d3 from "d3";
 
-let TestHook = {
+let BallHook = {
   mounted() {
     this.handleEvent("update-circle", ({ color, x, y }) => {
       d3.select("circle").style("fill", color).attr("cx", x).attr("cy", y);
@@ -10,7 +10,7 @@ let TestHook = {
     var height = 300;
 
     var svg = d3
-      .select("#test")
+      .select("#ball-field")
       .append("svg")
       .attr("width", width)
       .attr("height", height);
@@ -32,4 +32,4 @@ let TestHook = {
   },
 };
 
-export { TestHook };
+export { BallHook };
