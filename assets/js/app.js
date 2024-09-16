@@ -23,9 +23,11 @@ import { LiveSocket } from "phoenix_live_view";
 import topbar from "../vendor/topbar";
 
 import { BallHook } from "./hooks/ball";
+import { BatHook } from "./hooks/bat";
 
 let Hooks = {};
 Hooks.BallHook = BallHook;
+Hooks.BatHook = BatHook;
 
 let csrfToken = document
   .querySelector("meta[name='csrf-token']")
