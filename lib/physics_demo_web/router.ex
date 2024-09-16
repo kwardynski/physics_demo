@@ -20,6 +20,7 @@ defmodule PhysicsDemoWeb.Router do
     get "/", PageController, :home
 
     live "/ball", BallLive
+    live "/bat", BatLive
   end
 
   # Other scopes may use custom stacks.
