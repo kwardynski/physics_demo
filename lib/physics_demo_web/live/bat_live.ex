@@ -11,6 +11,7 @@ defmodule PhysicsDemoWeb.BatLive do
   @bat_width 10
   @bat_height 50
   @bat_x_offset 10
+  @bat_speed 4
 
   def render(assigns) do
     ~H"""
@@ -67,6 +68,6 @@ defmodule PhysicsDemoWeb.BatLive do
 
   defp calculate_bat_elevation, do: (@board_height - @bat_height) / 2
 
-  defp up_velocity, do: Velocity.new(3, 270)
-  defp down_velocity, do: Velocity.new(3, 90)
+  defp up_velocity, do: Velocity.new(@bat_speed, 270)
+  defp down_velocity, do: Velocity.new(@bat_speed, 90)
 end
