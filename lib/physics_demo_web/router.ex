@@ -22,6 +22,7 @@ defmodule PhysicsDemoWeb.Router do
     live "/ball", BallLive
     live "/bat", BatLive
     live "/both", BothLive
+    live "/dong", DongLive
   end
 
   # Other scopes may use custom stacks.

@@ -25,11 +25,13 @@ import topbar from "../vendor/topbar";
 import { BallHook } from "./hooks/ball";
 import { BatHook } from "./hooks/bat";
 import { BoardHook } from "./hooks/board";
+import { DongHook } from "./hooks/dong";
 
 let Hooks = {};
 Hooks.BallHook = BallHook;
 Hooks.BatHook = BatHook;
 Hooks.BoardHook = BoardHook;
+Hooks.DongHook = DongHook;
 
 let csrfToken = document
   .querySelector("meta[name='csrf-token']")
