@@ -1,4 +1,4 @@
-defmodule PhysicsDemoWeb.RandomBounceLive do
+defmodule PhysicsDemoWeb.DongLive do
   use PhysicsDemoWeb, :live_view
 
   alias GamesEngine.Grid.Point
@@ -19,7 +19,7 @@ defmodule PhysicsDemoWeb.RandomBounceLive do
 
   def render(assigns) do
     ~H"""
-    <div id="field" phx-hook="BoardHook" phx-window-keydown="key-down" />
+    <div id="field" phx-hook="DongHook" phx-window-keydown="key-down" />
     """
   end
 

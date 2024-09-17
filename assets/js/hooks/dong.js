@@ -1,6 +1,6 @@
 import * as d3 from "d3";
 
-let BoardHook = {
+let DongHook = {
   mounted() {
     this.handleEvent("init", (init_attrs) => {
       console.log("INIT");
@@ -18,6 +18,7 @@ let BoardHook = {
       svg
         .append("rect")
         .attr("id", "bat")
+        .attr("fill", "white")
         .attr("width", init_attrs.bat_width)
         .attr("height", init_attrs.bat_height)
         .attr("x", init_attrs.bat_x)
@@ -47,4 +48,4 @@ let BoardHook = {
   },
 };
 
-export { BoardHook };
+export { DongHook };
