@@ -18,6 +18,7 @@ let BoardHook = {
       svg
         .append("rect")
         .attr("id", "bat")
+        .attr("fill", "white")
         .attr("width", init_attrs.bat_width)
         .attr("height", init_attrs.bat_height)
         .attr("x", init_attrs.bat_x)
