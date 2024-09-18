@@ -56,7 +56,8 @@ defmodule PhysicsDemo.MixProject do
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
       {:bandit, "~> 1.5"},
-      {:games_engine, git: "https://github.com/kwardynski/games_engine", branch: "main"}
+      # {:games_engine, git: "https://github.com/kwardynski/games_engine", branch: "main"}
+      {:games_engine, "0.3.0"}
     ]
   end
 
